@@ -13,8 +13,6 @@ const Login = () => {
 					<div className="text-[20px] mt-2">Smart Parking System</div>
 				</div>
 				<LoginForm/>
-
-				{/* <LoginForm */}
 			</div>
 		</div>
 	);
