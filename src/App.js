@@ -7,13 +7,14 @@ import {
 } from "react-router-dom";
 
 import "./App.css";
+import Login from "./login/pages/Login"
 
 function App() {
 	return (
 		<Router>
 			<Switch>
 				<Route path="/" exact>
-					login page
+					<Login/>
 				</Route>
 
 				<Route path="/dashboard">dashboard page</Route>
