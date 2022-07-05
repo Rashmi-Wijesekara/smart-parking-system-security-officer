@@ -2,7 +2,13 @@
 module.exports = {
 	content: ["./src/**/*.{html,js}"],
 	theme: {
-		colors: {
+		extend: {
+			fontFamily: {
+				main: ["Montserrat", "sans-serif"],
+				second: ["Inter", "sans-serif"],
+			},
+			
+			colors: {
 			background: "#F5F5F9",
 			mainBlue: "#696CFF",
 			textInput: "#F5F5F5",
@@ -13,11 +19,6 @@ module.exports = {
 			navbarLogoText: "#566A7F",
 			white: "#FFFFFF",
 		},
-		extend: {
-			fontFamily: {
-				main: ["Montserrat", "sans-serif"],
-				second: ["Inter", "sans-serif"],
-			},
 		},
 	},
 	plugins: [],
