@@ -1,11 +1,32 @@
-import './App.css';
+import React from "react";
+import {
+	BrowserRouter as Router,
+	Route,
+	Redirect,
+	Switch,
+} from "react-router-dom";
+
+import "./App.css";
+import Login from "./login/pages/Login";
+import PasswordReset from "./password-reset/pages/PasswordReset"
 
 function App() {
-  return (
-    <div className="App">
-      <div className="font-bold text-red-500 text-xl">hello world</div>
-    </div>
-  );
+	return (
+		<Router>
+			<Switch>
+				<Route path="/" exact>
+					<Login />
+				</Route>
+
+				<Route path="/dashboard">dashboard page</Route>
+				<Route path="/password-reset">
+					<PasswordReset />
+				</Route>
+				<Route path="/error">404 not found</Route>
+				<Redirect to="/error" />
+			</Switch>
+		</Router>
+	);
 }
 
 export default App;
