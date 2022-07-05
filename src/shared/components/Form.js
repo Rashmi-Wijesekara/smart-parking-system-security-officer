@@ -16,8 +16,8 @@ const Form = (props) => {
 				/> */}
 
 				{props.inputNames.map((input) => (
-					<div className="">
-						<div className="text-textGrey">{input}</div>
+					<div className="" key={input.id}>
+						<div className="text-textGrey">{input.name}</div>
 						<input
 							type="text"
 							className="bg-textInput w-full rounded-lg my-3 mb-5 h-10 px-3 py-2"
