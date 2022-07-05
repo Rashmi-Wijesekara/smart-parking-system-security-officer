@@ -1,9 +1,16 @@
 import React from 'react'
 
-function Logout = () => {
+import Navbar from "../../shared/components/Navbar";
+
+const Logout = () => {
   return (
-	<div>Logout</div>
-  )
+		<div className="flex flex-row">
+			<Navbar />
+			<div className="bg-background flex-grow">
+				<div className="w-fit m-auto">log out</div>
+			</div>
+		</div>
+	);
 }
 
 export default Logout

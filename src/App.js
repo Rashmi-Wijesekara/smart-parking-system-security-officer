@@ -8,7 +8,12 @@ import {
 
 import "./App.css";
 import Login from "./login/pages/Login";
-import PasswordReset from "./password-reset/pages/PasswordReset"
+import PasswordReset from "./password-reset/components/PasswordResetHandler"
+import Dashboard from "./dashboard/pages/Dashboard"
+import EmployeeData from "./dashboard/pages/EmployeeData"
+import ParkingLog from "./dashboard/pages/ParkingLog";
+import MyProfile from "./dashboard/pages/MyProfile";
+import Logout from "./dashboard/pages/Logout";
 
 function App() {
 	return (
@@ -18,7 +23,26 @@ function App() {
 					<Login />
 				</Route>
 
-				<Route path="/dashboard">dashboard page</Route>
+				<Route path="/dashboard">
+					<Dashboard />
+				</Route>
+
+				<Route path="/employee-data">
+					<EmployeeData />
+				</Route>
+
+				<Route path="/parking-log">
+					<ParkingLog />
+				</Route>
+
+				<Route path="/profile">
+					<MyProfile />
+				</Route>
+
+				<Route path="/logout">
+					<Logout />
+				</Route>
+
 				<Route path="/password-reset">
 					<PasswordReset />
 				</Route>
