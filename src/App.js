@@ -9,6 +9,7 @@ import {
 import "./App.css";
 import Login from "./login/pages/Login";
 import PasswordReset from "./password-reset/components/PasswordResetHandler"
+import VerificationCode from "./password-reset/pages/VerificationCode";
 import Dashboard from "./dashboard/pages/Dashboard"
 import EmployeeData from "./dashboard/pages/EmployeeData"
 import ParkingLog from "./dashboard/pages/ParkingLog";
@@ -45,6 +46,10 @@ function App() {
 
 				<Route path="/password-reset">
 					<PasswordReset />
+				</Route>
+
+				<Route path="/verif-code">
+					<VerificationCode />
 				</Route>
 				<Route path="/error">404 not found</Route>
 				<Redirect to="/error" />

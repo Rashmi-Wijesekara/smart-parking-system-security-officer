@@ -41,6 +41,7 @@ const LoginForm = (props) => {
 				onSubmit={formSubmitHandler}
 				forgotPathTo={"/password-reset"}
 				btnName="Login"
+				loginStatus={false}
 			/>
 		</div>
 	);

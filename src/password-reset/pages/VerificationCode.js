@@ -1,6 +1,6 @@
 import React from 'react'
 
-function VerificationCode = () => {
+const VerificationCode = () => {
   return (
 	<div>VerificationCode</div>
   )
