@@ -13,7 +13,7 @@ const PasswordResetHandler = (props) => {
 		<div className="bg-background w-xl h-screen">
 			<div className="mx-auto">
 				<PasswordResetImage1 className=" mx-auto w-[200px] h-fit py-8" />
-				<Form1 />
+				<Form1 loginStatus={loginStatus} />
 			</div>
 		</div>
 	) : (
@@ -23,7 +23,7 @@ const PasswordResetHandler = (props) => {
 				<div className="m-auto">
 					<div className="bg-background w-xl h-screen">
 						<PasswordResetImage1 className=" mx-auto w-[200px] h-fit py-8" />
-						<Form1 />
+						<Form1 loginStatus={loginStatus} />
 					</div>
 				</div>
 			</div>

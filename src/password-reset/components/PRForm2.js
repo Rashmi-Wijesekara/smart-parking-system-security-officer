@@ -7,21 +7,24 @@ const PRForm1 = (props) => {
 	const [error, setError] = useState("");
 
 	let history = useHistory();
-	const checkMail = "zzz";
+	const checkCode = "123";
 
 	const InputNames = [
-		{ id: 1, name: "E-mail", type: "email" },
+		{ id: 1, name: "Verification Code", type: "number" },
 	];
 
-	const formSubmitHandler = (email) => {
-		if (email === checkMail) {
+	const formSubmitHandler = (code) => {
+		if (code === checkCode) {
 			setError("");
+
+			console.log("yeeeesss")
+
 			history.push({
 				pathname: "/verif-code",
 				sendProps: { loginStatus: props.loginStatus },
 			});
 		} else {
-			setError("Invalid Email Address");
+			setError("Invalid Code");
 		}
 	};
 
@@ -35,8 +38,8 @@ const PRForm1 = (props) => {
 			<Form
 				inputNames={InputNames}
 				onSubmit={formSubmitHandler}
-				btnName="Enter"
-				title="Please enter your valid email address"
+				btnName="Verify"
+				title="Please check your inbox and enter the given verification code"
 			/>
 		</div>
 	);
