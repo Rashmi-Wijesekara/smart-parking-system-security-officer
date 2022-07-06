@@ -47,7 +47,7 @@ const Form = (props) => {
 
 				{/* if the title is given */}
 				{props.title && (
-					<div className="text-center font-main font-semibold text-[22px] pb-8">
+					<div className="text-center font-main font-semibold pb-8">
 						{props.title}
 					</div>
 				)}
@@ -87,7 +87,7 @@ const Form = (props) => {
 				cursor-pointer shadow-lg active:shadow-2xl active:translate-y-2 transform duration-300"
 					onClick={formSubmit}
 				>
-					Login
+					{props.btnName}
 				</div>
 			</div>
 		</div>

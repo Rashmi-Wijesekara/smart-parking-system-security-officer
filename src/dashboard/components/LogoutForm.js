@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 
 import Form from "../../shared/components/Form";
 
-const LoginForm = (props) => {
+const LogoutForm = (props) => {
 	const [error, setError] = useState("");
 
 	const InputNames = [
@@ -17,17 +17,16 @@ const LoginForm = (props) => {
 	// check for id and password
 	const formSubmitHandler = (input1, input2) => {
 		if (input1 === officerId && input2 === password) {
-			console.log("successfully logged-in");
+			console.log("successfully logged-out");
 			setError("");
 
 			// redirect to the dashboard
-			history.push("/dashboard");
+			history.push("/");
 		} else {
 			console.log("wrong id & password");
 			setError("Invalid ID & Password");
 		}
 	};
-
 	return (
 		<div className="max-w-xl mx-auto mt-5">
 			{error && (
@@ -37,13 +36,12 @@ const LoginForm = (props) => {
 			)}
 			<Form
 				inputNames={InputNames}
-				forgot={true}
 				onSubmit={formSubmitHandler}
-				forgotPathTo={"/password-reset"}
-				btnName="Login"
+				title="Please enter your password again to verify log out"
+				btnName="Log out"
 			/>
 		</div>
 	);
 };
 
-export default LoginForm;
+export default LogoutForm;
