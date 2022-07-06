@@ -8,7 +8,7 @@ import {
 
 import "./App.css";
 import Login from "./login/pages/Login";
-import PasswordReset from "./password-reset/components/PasswordResetHandler"
+import PasswordReset from "./password-reset/pages/EmailEnter"
 import VerificationCode from "./password-reset/pages/VerificationCode";
 import Dashboard from "./dashboard/pages/Dashboard"
 import EmployeeData from "./dashboard/pages/EmployeeData"

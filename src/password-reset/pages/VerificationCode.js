@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import { useLocation } from "react-router-dom";
 
 import { ReactComponent as PasswordResetImage2 } from "../../assets/images/password-reset-2.svg";
@@ -6,10 +6,10 @@ import Navbar from "../../shared/components/Navbar";
 import Form2 from "../components/PRForm2";
 
 const VerificationCode = (props) => {
-  let location = useLocation();
+	let location = useLocation();
 	const loginStatus = location.sendProps.loginStatus;
 
-  return loginStatus === false ? (
+	return loginStatus === false ? (
 		<div className="bg-background w-xl h-screen">
 			<div className="mx-auto">
 				<PasswordResetImage2 className=" mx-auto w-[200px] h-fit py-8" />
@@ -29,6 +29,6 @@ const VerificationCode = (props) => {
 			</div>
 		</div>
 	);
-}
+};
 
-export default VerificationCode
+export default VerificationCode;
