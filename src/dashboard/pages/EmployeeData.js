@@ -5,7 +5,7 @@ import Navbar from "../../shared/components/Navbar";
 const EmployeeData = () => {
   return (
 		<div className="flex flex-row">
-			<Navbar />
+			<Navbar path="/employee-data" />
 			<div className="bg-background flex-grow">
 				<div className="w-fit m-auto">employee data</div>
 			</div>

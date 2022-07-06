@@ -1,5 +1,4 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 
 // import icons in the navbar as components
 import { ReactComponent as LogoIcon } from "../../assets/icons/logo.svg";
@@ -10,7 +9,10 @@ import { ReactComponent as ProfileIcon } from "../../assets/icons/profile.svg";
 
 import NavbarButton from "./NavbarButton";
 
-const Navbar = () => {
+const Navbar = (props) => {
+
+	const checkPath = props.path
+
 	return (
 		<div className="bg-white w-[270px] h-screen flex-none border-r-black border-r-2 z-100">
 			<div className="flex flex-row items-center w-fit mx-auto p-3">
@@ -22,15 +24,13 @@ const Navbar = () => {
 
 			<div className="mx-auto w-fit flex-col space-y-4 my-10">
 				{/* dashboard */}
-				<NavLink to="/dashboard" activeClassName="bg-white">
-					<NavbarButton
-						name="Dashboard"
-						bgColor="bg-mainBlue"
-						textColor="text-navbarTextWhite"
-					>
-						<DashboardIcon className="fill-navbarTextWhite" />
-					</NavbarButton>
-				</NavLink>
+				<NavbarButton
+					name="Dashboard"
+					path="/dashboard"
+					currentPath={checkPath}
+				>
+					<DashboardIcon />
+				</NavbarButton>
 			</div>
 
 			<div className="">
@@ -39,47 +39,45 @@ const Navbar = () => {
 				</div>
 
 				<div className="mx-auto w-fit flex-col my-2">
-					<NavLink to="/employee-data">
-						<NavbarButton
-							name="Employee Data"
-							bgColor="bg-navbarBgGrey"
-							textColor="text-navbarTextGrey"
-						>
-							<EmployeeIcon className="fill-navbarTextGrey" />
-						</NavbarButton>
-					</NavLink>
 
-					<NavLink to="/parking-log">
-						<NavbarButton
-							name="Parking Log"
-							bgColor="bg-navbarBgGrey"
-							textColor="text-navbarTextGrey"
-						>
-							<ParkingIcon className="fill-navbarTextGrey" />
-						</NavbarButton>
-					</NavLink>
+					{/* employee data */}
+					<NavbarButton
+						name="Employee Data"
+						path="/employee-data"
+						currentPath={checkPath}
+					>
+						<EmployeeIcon />
+					</NavbarButton>
 
-					<NavLink to="/profile">
-						<NavbarButton
-							name="My Profile"
-							bgColor="bg-navbarBgGrey"
-							textColor="text-navbarTextGrey"
-						>
-							<ProfileIcon className="fill-navbarTextGrey" />
-						</NavbarButton>
-					</NavLink>
+					{/* parking log */}
+					<NavbarButton
+						name="Parking Log"
+						path="/parking-log"
+						currentPath={checkPath}
+					>
+						<ParkingIcon />
+					</NavbarButton>
+
+					{/* profile */}
+					<NavbarButton
+						name="My Profile"
+						path="/profile"
+						currentPath={checkPath}
+					>
+						<ProfileIcon />
+					</NavbarButton>
 				</div>
 			</div>
+
 			<div className="mx-auto w-fit mt-[90%]">
-				<NavLink to="/logout">
-					<NavbarButton
-						name="Log out"
-						bgColor="bg-navbarBgGrey"
-						textColor="text-navbarTextGrey"
-					>
-						<ProfileIcon className="fill-navbarTextGrey" />
-					</NavbarButton>
-				</NavLink>
+				{/* logout */}
+				<NavbarButton
+					name="Log out"
+					path="/logout"
+					currentPath={checkPath}
+				>
+					<ProfileIcon />
+				</NavbarButton>
 			</div>
 		</div>
 	);
