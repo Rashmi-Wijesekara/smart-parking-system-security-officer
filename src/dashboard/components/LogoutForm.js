@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
 
 import Form from "../../shared/components/Form";
 
@@ -12,17 +11,15 @@ const LogoutForm = (props) => {
 	];
 	const officerId = "123";
 	const password = "zzz";
-	let history = useHistory();
 
 	// check for id and password
 	const formSubmitHandler = (input1, input2) => {
 		if (input1 === officerId && input2 === password) {
 			console.log("successfully logged-out");
 			setError("");
-
-			// redirect to the dashboard
-			history.push("/");
-		} else {
+			props.logoutHandler(input1, input2);
+		} 
+		else {
 			console.log("wrong id & password");
 			setError("Invalid ID & Password");
 		}

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 
 import Form from "../../shared/components/Form";
 
@@ -12,7 +12,7 @@ const LoginForm = (props) => {
 	];
 	const officerId = "123";
 	const password = "zzz";
-	let history = useHistory();
+	// let history = useHistory();
 
 	// check for id and password
 	const formSubmitHandler = (input1, input2) => {
@@ -21,7 +21,9 @@ const LoginForm = (props) => {
 			setError("");
 
 			// redirect to the dashboard
-			history.push("/dashboard");
+			// history.push("/dashboard");
+
+			props.loginHandler(input1, input2);
 		} else {
 			console.log("wrong id & password");
 			setError("Invalid ID & Password");

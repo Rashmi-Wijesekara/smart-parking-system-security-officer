@@ -7,6 +7,8 @@ import {
 } from "react-router-dom";
 
 import "./App.css";
+import {ProtectedRoute} from './ProtectedRoute'
+
 import Login from "./login/pages/Login";
 import PasswordReset from "./password-reset/pages/EmailEnter"
 import VerificationCode from "./password-reset/pages/VerificationCode";
@@ -24,33 +26,41 @@ function App() {
 					<Login />
 				</Route>
 
-				<Route path="/dashboard">
-					<Dashboard />
-				</Route>
-
-				<Route path="/employee-data">
-					<EmployeeData />
-				</Route>
-
-				<Route path="/parking-log">
-					<ParkingLog />
-				</Route>
-
-				<Route path="/profile">
-					<MyProfile />
-				</Route>
-
-				<Route path="/logout">
-					<Logout />
-				</Route>
-
-				<Route path="/password-reset">
-					<PasswordReset />
-				</Route>
-
-				<Route path="/verif-code">
-					<VerificationCode />
-				</Route>
+				<ProtectedRoute
+					exact
+					path="/dashboard"
+					component={Dashboard}
+				/>
+				<ProtectedRoute
+					exact
+					path="/employee-data"
+					component={EmployeeData}
+				/>
+				<ProtectedRoute
+					exact
+					path="/parking-log"
+					component={ParkingLog}
+				/>
+				<ProtectedRoute
+					exact
+					path="/profile"
+					component={MyProfile}
+				/>
+				<ProtectedRoute
+					exact
+					path="/logout"
+					component={Logout}
+				/>
+				<ProtectedRoute
+					exact
+					path="/password-reset"
+					component={PasswordReset}
+				/>
+				<ProtectedRoute
+					exact
+					path="/verif-code"
+					component={VerificationCode}
+				/>
 				<Route path="/error">404 not found</Route>
 				<Redirect to="/error" />
 			</Switch>
