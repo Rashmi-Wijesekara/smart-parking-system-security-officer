@@ -11,7 +11,7 @@ const Login = () => {
 	const loginHandler = (id, pswd) => {
 		auth.login(() => {
 			history.push("/dashboard")
-		})
+		}, id, pswd)
 	}	
 
 	return (

@@ -6,9 +6,7 @@ import auth from "../../shared/Auth";
 
 const PRForm3 = (props) => {
 	const [error, setError] = useState("");
-
 	let history = useHistory();
-	const checkCode = "123";
 
 	const InputNames = [
 		{ id: 1, name: "Password", type: "password" },
@@ -19,6 +17,8 @@ const PRForm3 = (props) => {
 		if (password === confirmedPassword){
 			setError("");
 			auth.deleteSession()
+			const {id,currentPswd} = auth.getLoginData()
+			auth.saveLoginData(id, password)
 			history.push({
 				pathname: "/",
 				// sendProps: { loginStatus: props.loginStatus },
