@@ -2,27 +2,29 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import Form from "../../shared/components/Form";
+import auth from "../../shared/Auth";
 
-const PRForm2 = (props) => {
+const PRForm3 = (props) => {
 	const [error, setError] = useState("");
 
 	let history = useHistory();
 	const checkCode = "123";
 
 	const InputNames = [
-		{ id: 1, name: "Verification Code", type: "number" },
+		{ id: 1, name: "Password", type: "password" },
+		{ id: 2, name: "Confirm Password", type: "password"}
 	];
 
-	const formSubmitHandler = (code) => {
-		if (code === checkCode) {
+	const formSubmitHandler = (password, confirmedPassword) => {
+		if (password === confirmedPassword){
 			setError("");
-
+			auth.deleteSession()
 			history.push({
-				pathname: "/new-password",
-				sendProps: { loginStatus: props.loginStatus },
+				pathname: "/",
+				// sendProps: { loginStatus: props.loginStatus },
 			});
 		} else {
-			setError("Invalid Code");
+			setError("Password and the confirmed password should be the same");
 		}
 	};
 
@@ -36,11 +38,11 @@ const PRForm2 = (props) => {
 			<Form
 				inputNames={InputNames}
 				onSubmit={formSubmitHandler}
-				btnName="Verify"
-				title="Please check your inbox and enter the given verification code"
+				btnName="Reset Password"
+				title="Please enter your new password"
 			/>
 		</div>
 	);
 };
 
-export default PRForm2;
+export default PRForm3;

@@ -1,13 +1,16 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 
 import { ReactComponent as PasswordResetImage2 } from "../../assets/images/password-reset-2.svg";
 import Navbar from "../../shared/components/Navbar";
 import Form2 from "../components/PRForm2";
+import auth from "../../shared/Auth";
 
 const VerificationCode = (props) => {
-	let location = useLocation();
-	const loginStatus = location.sendProps.loginStatus;
+	// let location = useLocation();
+	// const loginStatus = location.sendProps.loginStatus;
+
+	const loginStatus = auth.getSession();
 
 	return loginStatus === false ? (
 		<div className="bg-background w-xl h-screen">
