@@ -17,7 +17,7 @@ const Form = (props) => {
 	// submit the form back to the parent component
 	const formSubmit = () => {
 		if (props.inputNames.length === 2) {
-			if (input1.length>0 && input2.length>0) {
+			if (input1.length > 0 && input2.length > 0) {
 				props.onSubmit(input1, input2);
 				setInput1("");
 				setInput2("");
@@ -47,7 +47,7 @@ const Form = (props) => {
 
 				{/* if the title is given */}
 				{props.title && (
-					<div className="text-center font-main font-semibold text-[22px] pb-8">
+					<div className="text-center font-main font-semibold pb-8">
 						{props.title}
 					</div>
 				)}
@@ -70,7 +70,7 @@ const Form = (props) => {
 
 				{/* forgot password link */}
 				{props.forgot === true ? (
-					<NavLink to={props.forgotPathTo}>
+					<NavLink to={{ pathname: props.forgotPathTo, sendProps: {loginStatus: props.loginStatus},}}>
 						<div
 							className="text-right text-textGreyLight text-sm cursor-pointer 
 					active:translate-y-2 transform duration-300"
@@ -87,7 +87,7 @@ const Form = (props) => {
 				cursor-pointer shadow-lg active:shadow-2xl active:translate-y-2 transform duration-300"
 					onClick={formSubmit}
 				>
-					Login
+					{props.btnName}
 				</div>
 			</div>
 		</div>

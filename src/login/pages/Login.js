@@ -1,9 +1,18 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 
 import { ReactComponent as LoginImage } from "../../assets/images/login.svg";
 import LoginForm from "../components/LoginForm"
+import auth from "../../shared/Auth";
 
 const Login = () => {
+	let history = useHistory();
+
+	const loginHandler = (id, pswd) => {
+		auth.login(() => {
+			history.push("/dashboard")
+		}, id, pswd)
+	}	
 
 	return (
 		<div className="bg-background w-xl h-screen">
@@ -13,7 +22,7 @@ const Login = () => {
 					<div className="text-2xl">Security Officer - Login</div>
 					<div className="text-sm mt-2">Smart Parking System</div>
 				</div>
-				<LoginForm />
+				<LoginForm loginHandler={loginHandler}/>
 			</div>
 		</div>
 	);

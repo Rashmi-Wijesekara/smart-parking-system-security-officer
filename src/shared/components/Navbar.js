@@ -14,7 +14,7 @@ const Navbar = (props) => {
 	const checkPath = props.path
 
 	return (
-		<div className="bg-white w-[270px] h-screen flex-none border-r-black border-r-2 z-100">
+		<div className="bg-white w-[270px] h-screen flex-none z-100 shadow">
 			<div className="flex flex-row items-center w-fit mx-auto p-3">
 				<LogoIcon className="mr-4" />
 				<div className="font-logoText font-bold text-lg text-navbarLogoText">
