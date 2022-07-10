@@ -1,13 +1,16 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 
 import { ReactComponent as PasswordResetImage1 } from "../../assets/images/password-reset-1.svg";
 import Form1 from "../components/PRForm1";
 import Navbar from "../../shared/components/Navbar";
+import auth from "../../shared/Auth";
 
 const EmailEnter = (props) => {
-	let location = useLocation();
-	const loginStatus = location.sendProps.loginStatus;
+	// let location = useLocation();
+	// const loginStatus = location.sendProps.loginStatus;
+
+	const loginStatus = auth.getSession()
 
 	return loginStatus === false ? (
 		<div className="bg-background w-xl h-screen">

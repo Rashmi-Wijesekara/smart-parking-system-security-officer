@@ -12,6 +12,7 @@ import {ProtectedRoute} from './ProtectedRoute'
 import Login from "./login/pages/Login";
 import PasswordReset from "./password-reset/pages/EmailEnter"
 import VerificationCode from "./password-reset/pages/VerificationCode";
+import NewPassword from "./password-reset/pages/NewPassword"
 import Dashboard from "./dashboard/pages/Dashboard"
 import EmployeeData from "./dashboard/pages/EmployeeData"
 import ParkingLog from "./dashboard/pages/ParkingLog";
@@ -51,15 +52,20 @@ function App() {
 					path="/logout"
 					component={Logout}
 				/>
-				<ProtectedRoute
+				<Route
 					exact
 					path="/password-reset"
 					component={PasswordReset}
 				/>
-				<ProtectedRoute
+				<Route
 					exact
 					path="/verif-code"
 					component={VerificationCode}
+				/>
+				<Route
+					exact
+					path="/new-password"
+					component={NewPassword}
 				/>
 				<Route path="/error">404 not found</Route>
 				<Redirect to="/error" />

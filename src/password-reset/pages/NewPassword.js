@@ -1,8 +1,8 @@
 import React from 'react'
 
-const NewPassword = () => {
+const NewPassword = (props) => {
 	return (
-		<div className=""></div>
+		<div className="">set new password</div>
 	)
 }
 

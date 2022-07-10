@@ -17,10 +17,8 @@ const PRForm1 = (props) => {
 		if (code === checkCode) {
 			setError("");
 
-			console.log("yeeeesss")
-
 			history.push({
-				pathname: "/verif-code",
+				pathname: "/new-password",
 				sendProps: { loginStatus: props.loginStatus },
 			});
 		} else {
