@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import Form from "../../shared/components/Form";
+import auth from "../../shared/Auth"
 
 const LogoutForm = (props) => {
 	const [error, setError] = useState("");
@@ -9,12 +10,11 @@ const LogoutForm = (props) => {
 		{ id: 1, name: "Security Officer ID", type: "text" },
 		{ id: 2, name: "Password", type: "password" },
 	];
-	const officerId = "123";
-	const password = "zzz";
+	const { id, pswd } = auth.getLoginData();
 
 	// check for id and password
 	const formSubmitHandler = (input1, input2) => {
-		if (input1 === officerId && input2 === password) {
+		if (input1 === id && input2 === pswd) {
 			console.log("successfully logged-out");
 			setError("");
 			props.logoutHandler(input1, input2);
