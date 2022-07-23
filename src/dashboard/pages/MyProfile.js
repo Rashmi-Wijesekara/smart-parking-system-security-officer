@@ -10,11 +10,11 @@ const MyProfile = () => {
 		<div className="flex flex-row">
 			<Navbar path="/profile" />
 			<div className="bg-background flex-grow">
-				<div className="flex flex-row mt-10">
-					<div className="grow">
-						<div className="font-main text-lg font-bold text-textGrey text-center">
-							Shift Log
-						</div>
+				<div className="font-main text-lg font-bold text-textGrey w-fit my-5 ml-80">
+					Shift Log
+				</div>
+				<div className="flex flex-row mt-4">
+					<div className="grow px-6">
 						<Table />
 					</div>
 					<div className="flex-col items-center justify-items-center mx-10">

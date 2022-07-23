@@ -21,6 +21,8 @@ module.exports = {
 				navbarLogoText: "#566A7F",
 				white: "#FFFFFF",
 				navbarBgGrey: "#DBDBDB",
+				tableTitleBg: "#F9F8F9",
+				tableTitleBorder: "#EAEAEA",
 			},
 		},
 	},
