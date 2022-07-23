@@ -5,7 +5,7 @@ import { ReactComponent as SearchIcon } from "../../assets/icons/search.svg";
 const SearchForm = (props) => {
 
 	const searchClickHandler = () => {
-
+		// send the user inputs back to the parking log page
 	}
 
 	return (

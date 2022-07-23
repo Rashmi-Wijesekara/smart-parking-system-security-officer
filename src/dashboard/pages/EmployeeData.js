@@ -2,7 +2,7 @@ import React from "react";
 
 import Navbar from "../../shared/components/Navbar";
 import Table from "../../shared/components/Table";
-
+import EmployeeSearchForm from "../../shared/components/EmployeeSearchForm";
 import * as sampleData from "../../sampleData";
 
 const EmployeeData = () => {
@@ -24,7 +24,7 @@ const EmployeeData = () => {
 						/>
 					</div>
 					<div className="flex-col items-center justify-items-center mx-10">
-						ehsfdsfdsfds dssad adasd asd ads
+						<EmployeeSearchForm />
 					</div>
 				</div>
 			</div>
