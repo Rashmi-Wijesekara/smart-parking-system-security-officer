@@ -5,7 +5,12 @@ import ProfileCard from "../components/ProfileCard";
 import PasswordResetButton from "../components/PasswordResetButton";
 import Table from "../../shared/components/Table";
 
+import * as sampleData from "../../sampleData";
+
 const MyProfile = () => {
+	const shiftLogTitles = sampleData.shiftLogTitles
+	const shiftLogData = sampleData.shiftLogData
+
 	return (
 		<div className="flex flex-row">
 			<Navbar path="/profile" />
@@ -15,7 +20,7 @@ const MyProfile = () => {
 				</div>
 				<div className="flex flex-row mt-4">
 					<div className="grow px-6">
-						<Table />
+						<Table titles={shiftLogTitles} data={shiftLogData} />
 					</div>
 					<div className="flex-col items-center justify-items-center mx-10">
 						<ProfileCard />
