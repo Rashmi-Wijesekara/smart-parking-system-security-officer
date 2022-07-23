@@ -1,24 +1,32 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 
 import Navbar from "../../shared/components/Navbar";
+import ProfileCard from "../components/ProfileCard";
+import PasswordResetButton from "../components/PasswordResetButton";
+import Table from "../../shared/components/Table";
+
+import * as sampleData from "../../sampleData";
 
 const MyProfile = () => {
+	const shiftLogTitles = sampleData.shiftLogTitles
+	const shiftLogData = sampleData.shiftLogData
+
 	return (
 		<div className="flex flex-row">
 			<Navbar path="/profile" />
 			<div className="bg-background flex-grow">
-				<div className="w-fit m-auto">my profile</div>
-				<NavLink
-					to={{
-						pathname: "/password-reset",
-						sendProps: { loginStatus: true },
-					}}
-				>
-					<div className="bg-red-300 w-fit py-2 px-4 mx-auto mt-10 rounded-xl cursor-pointer text-white">
-						pswd reset
+				<div className="font-main text-lg font-bold text-textGrey w-fit my-5 ml-80">
+					Shift Log
+				</div>
+				<div className="flex flex-row mt-4">
+					<div className="grow px-6">
+						<Table titles={shiftLogTitles} data={shiftLogData} />
 					</div>
-				</NavLink>
+					<div className="flex-col items-center justify-items-center mx-10">
+						<ProfileCard />
+						<PasswordResetButton />
+					</div>
+				</div>
 			</div>
 		</div>
 	);
