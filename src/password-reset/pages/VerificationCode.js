@@ -22,7 +22,7 @@ const VerificationCode = (props) => {
 	) : (
 		<div className="flex flex-row">
 			<Navbar />
-			<div className="bg-background flex-grow">
+			<div className="bg-background flex-grow pl-[270px]">
 				<div className="m-auto">
 					<div className="bg-background w-xl h-screen">
 						<PasswordResetImage2 className=" mx-auto w-[200px] h-fit py-8" />
