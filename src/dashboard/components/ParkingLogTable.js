@@ -12,7 +12,7 @@ const ParkingLogTable = () => {
 			<div className="font-main text-lg font-bold text-textGrey w-fit my-5 ml-80">
 				Latest Parking Log
 			</div>
-			<div className="my-5 overflow-y-auto h-[300px]">
+			<div className="mt-3 overflow-y-auto h-[235px]">
 				<Table
 					titles={parkingLogTitles}
 					data={parkingLogData}

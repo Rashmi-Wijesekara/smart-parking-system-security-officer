@@ -11,7 +11,7 @@ const Dashboard = () => {
 		<div className="flex flex-row">
 			<Navbar path="/dashboard" />
 			<div className="bg-background flex-grow pl-[270px] h-full overflow-y-auto">
-				<div className="font-main text-lg font-bold text-textGrey w-fit my-5 ml-80">
+				<div className="font-main text-lg font-bold text-textGrey w-fit my-3 ml-80">
 					Parking Space Overview
 				</div>
 				<div className="flex flex-row mt-4">
