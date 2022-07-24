@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import * as $ from "jquery";
 
 import Navbar from "../../shared/components/Navbar";
 import ParkingSpace from "../components/ParkingSpaceDisplay";
@@ -8,23 +9,87 @@ import ParkingLogTable from "../components/ParkingLogTable";
 import MainPopup from "../components/MainPopup";
 
 import { ReactComponent as ConnectIcon } from "../../assets/icons/connect.svg";
+import * as sampleData from "../../sampleData";
 
 const Dashboard = () => {
+	// reader device paired or not
 	const [readerStatus, setReaderStatus] = useState(false);
 
+	const [openMainPopup, setOpenMainPopup] = useState(false);
+	const [rfid, setRfid] = useState("");
+	const [employeeName, setEmployeeName] = useState("");
+
+	// get the employee data from the sample database
+	const employeeData = sampleData.employeeData;
+
+	// ***********************************************
+
 	const MainPopupOpen = () => {
-		console.log("open main popup")
+		console.log("opened");
+		setOpenMainPopup(true);
 	};
 
+	// check whether the RFID device is already connected
+	useEffect(() => {
+		navigator.usb.getDevices().then((devices) => {
+			devices.forEach((device) => {
+				if (
+					device.productName === "SYC ID&IC USB Reader" &&
+					device.serialNumber === "08FF20140315"
+				){
+					setReaderStatus(true)
+					console.log("RFID reader already connected")
+				}
+			});
+		});
+	});
+
+	// hidden RFID input field disabled when the main popup is opened
+	useEffect(() => {
+		if (openMainPopup === true) {
+			document.getElementById("rfid").disabled = true;
+		} else if (openMainPopup === false) {
+			document.getElementById("rfid").disabled = false;
+			document.getElementById("rfid").focus();
+		}
+	}, [openMainPopup]);
+
 	const readerConnect = () => {
+		// select the RFID reader from the alert notification
+		// and give permission to use in this website
+
 		navigator.usb
 			.requestDevice({ filters: [] })
 			.then(function (device) {
 				console.log(device);
-				setReaderStatus(true)
-			})
-			.then(MainPopupOpen)
-			
+				setReaderStatus(true);
+			});
+	};
+
+	// always focus on hidden input field to get the RFID reading value
+	$(document).ready(function () {
+		$("#rfid").focus();
+		$("body").mousemove(function () {
+			$("#rfid").focus();
+		});
+	});
+
+	const handleRfidChange = (event) => {
+		setRfid(event.target.value);
+
+		// scanner fully got the ID value
+		if (rfid.length === 9) {
+			console.log(rfid);
+			MainPopupOpen();
+			document.getElementById("rfid").value = "";
+
+			for (const employee of employeeData) {
+				if (employee.employeeId === rfid) {
+					console.log(employee.name);
+					setEmployeeName(employee.name);
+				}
+			}
+		}
 	};
 
 	return (
@@ -45,7 +110,9 @@ const Dashboard = () => {
 					>
 						<ConnectIcon className="fill-white" />
 						<div className="my-auto ml-4">
-							{readerStatus ? "Reader connected": "Connect Reader"}
+							{readerStatus
+								? "Reader connected"
+								: "Connect Reader"}
 						</div>
 					</div>
 				</div>
@@ -59,9 +126,22 @@ const Dashboard = () => {
 						<ParkingSlotsCount />
 					</div>
 				</div>
+				{/* hidden input field to get RFID reading data */}
+				<input
+					className="w-0 fixed bg-black text-white"
+					id="rfid"
+					disabled={false}
+					onChange={handleRfidChange}
+				/>
 			</div>
 
-			<MainPopup />
+			{openMainPopup && (
+				<MainPopup
+					openMainPopup={setOpenMainPopup}
+					employeeId={rfid}
+					employeeName={employeeName}
+				/>
+			)}
 		</div>
 	);
 };
