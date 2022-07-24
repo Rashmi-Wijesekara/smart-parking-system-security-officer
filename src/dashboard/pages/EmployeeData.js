@@ -2,8 +2,9 @@ import React from "react";
 
 import Navbar from "../../shared/components/Navbar";
 import Table from "../../shared/components/Table";
-
+import EmployeeSearchForm from "../../shared/components/EmployeeSearchForm";
 import * as sampleData from "../../sampleData";
+import VehicleHandlePopup from "../../shared/components/VehicleHandlePopup"
 
 const EmployeeData = () => {
 	const employeeTitles = sampleData.employeeTitles
@@ -12,7 +13,7 @@ const EmployeeData = () => {
 	return (
 		<div className="flex flex-row">
 			<Navbar path="/employee-data" />
-			<div className="bg-background flex-grow">
+			<div className="bg-background flex-grow pl-[270px] h-screen">
 				<div className="font-main text-lg font-bold text-textGrey w-fit my-5 ml-80">
 					Employee Data
 				</div>
@@ -24,7 +25,7 @@ const EmployeeData = () => {
 						/>
 					</div>
 					<div className="flex-col items-center justify-items-center mx-10">
-						ehsfdsfdsfds dssad adasd asd ads
+						<EmployeeSearchForm />
 					</div>
 				</div>
 			</div>

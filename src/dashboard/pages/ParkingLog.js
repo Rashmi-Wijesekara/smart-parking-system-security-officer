@@ -12,11 +12,11 @@ const ParkingLog = () => {
 	return (
 		<div className="flex flex-row">
 			<Navbar path="/parking-log" />
-			<div className="bg-background flex-grow">
+			<div className="bg-background flex-grow pl-[270px] h-screen">
 				<div className="font-main text-lg font-bold text-textGrey w-fit my-5 ml-80">
 					Parking Log
 				</div>
-				<div className="flex flex-row mt-4">
+				<div className="flex flex-row mt-4 overflow-y-auto h-5/6">
 					<div className="grow px-6">
 						<Table
 							titles={parkingLogTitles}

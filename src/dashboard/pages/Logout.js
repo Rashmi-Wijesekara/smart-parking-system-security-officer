@@ -18,7 +18,7 @@ const Logout = (props) => {
 	return (
 		<div className="flex flex-row">
 			<Navbar path="/logout" />
-			<div className="bg-background flex-grow">
+			<div className="bg-background flex-grow pl-[270px] h-screen">
 				<div className="mx-auto">
 					<LogoutImage className=" mx-auto w-[200px] h-fit py-8" />
 
