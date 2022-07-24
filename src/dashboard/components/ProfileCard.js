@@ -1,8 +1,6 @@
 import React from "react";
 import { ReactComponent as ProfilePic } from "../../assets/images/profile-pic.svg"
 
-import { ReactComponent as PasswordIcon } from "../../assets/icons/password.svg";
-
 const ProfileCard = () => {
 
 	const fullname = "Mahinda Perera"

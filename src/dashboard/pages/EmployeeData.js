@@ -4,7 +4,6 @@ import Navbar from "../../shared/components/Navbar";
 import Table from "../../shared/components/Table";
 import EmployeeSearchForm from "../../shared/components/EmployeeSearchForm";
 import * as sampleData from "../../sampleData";
-import VehicleHandlePopup from "../../shared/components/VehicleHandlePopup"
 
 const EmployeeData = () => {
 	const employeeTitles = sampleData.employeeTitles

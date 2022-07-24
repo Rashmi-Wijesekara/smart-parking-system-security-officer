@@ -50,7 +50,7 @@ export const parkingLogTitles = [
 export const parkingLogData = [
 	{
 		id: "1",
-		employeeId: "E0001",
+		employeeId: "000294387",
 		name: "M.R. Perera",
 		vehicleId: "CDB 4306",
 		inOut: "IN",
@@ -59,7 +59,7 @@ export const parkingLogData = [
 	},
 	{
 		id: "2",
-		employeeId: "E0405",
+		employeeId: "000294392",
 		name: "J.D. Wijesekara",
 		vehicleId: "AAB 5546",
 		inOut: "IN",
@@ -174,8 +174,6 @@ export const parkingLogData = [
 		date: "04-06-2022",
 		time: "09.30 am",
 	},
-	
-	
 ];
 
 export const employeeTitles = [
@@ -188,14 +186,14 @@ export const employeeTitles = [
 export const employeeData = [
 	{
 		id: "1",
-		employeeId: "E0001",
+		employeeId: "000294392",
 		name: "M.R. Perera",
 		vehicleId: "CDB 4306",
 		phoneNo: "0778435221",
 	},
 	{
 		id: "2",
-		employeeId: "E4501",
+		employeeId: "000294387",
 		name: "M.R. Wijesekara",
 		vehicleId: "DF 4556",
 		phoneNo: "0722375621",
