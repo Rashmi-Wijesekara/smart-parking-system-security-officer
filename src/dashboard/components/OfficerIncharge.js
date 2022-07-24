@@ -5,7 +5,6 @@ import { ReactComponent as ProfilePic } from "../../assets/images/profile-pic.sv
 const OfficerIncharge = () => {
 
 	const fullname = "Mahinda Perera";
-	const officerId = "SE123";
 	const shiftType = "Day";
 	const startTime = "08.30 am";
 

@@ -9,7 +9,7 @@ const ParkingLogTable = () => {
 
 	return (
 		<div className="">
-			<div className="font-main text-lg font-bold text-textGrey w-fit my-5 ml-80">
+			<div className="font-main text-lg font-bold text-textGrey w-fit mt-2 ml-80">
 				Latest Parking Log
 			</div>
 			<div className="mt-3 overflow-y-auto h-[235px]">

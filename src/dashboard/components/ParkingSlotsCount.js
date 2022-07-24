@@ -6,8 +6,8 @@ import { ReactComponent as Slots3 } from "../../assets/icons/slots3.svg";
 
 const ParkingSlotsCount = () => {
 	return (
-		<div className="font-main my-3 w-fit mx-auto">
-			<div className="w-40 text-lg font-bold text-textGrey text-center mx-auto mb-2">
+		<div className="font-main mt-5 w-fit mx-auto">
+			<div className="w-40 text-lg font-bold text-textGrey text-center mx-auto">
 				Parking Slots
 			</div>
 			<div className="bg-white max-w-xs shadow-lg rounded-xl p-2 my-1">
