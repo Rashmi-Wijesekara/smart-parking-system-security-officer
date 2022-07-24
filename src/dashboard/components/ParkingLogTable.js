@@ -1,0 +1,25 @@
+import React from "react";
+
+import Table from "../../shared/components/Table";
+import * as sampleData from "../../sampleData";
+
+const ParkingLogTable = () => {
+	const parkingLogData = sampleData.parkingLogData;
+	const parkingLogTitles = sampleData.parkingLogTitles;
+
+	return (
+		<div className="">
+			<div className="font-main text-lg font-bold text-textGrey w-fit my-5 ml-80">
+				Latest Parking Log
+			</div>
+			<div className="my-5 overflow-y-auto h-[300px]">
+				<Table
+					titles={parkingLogTitles}
+					data={parkingLogData}
+				/>
+			</div>
+		</div>
+	);
+};
+
+export default ParkingLogTable;
