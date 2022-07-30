@@ -11,6 +11,13 @@ class Auth {
 		);
 	}
 
+	saveOfficerFullData(officer) {
+		sessionStorage.setItem(
+			"officerFullData",
+			JSON.stringify(officer)
+		)
+	}
+
 	// get the login status from the session
 	// true -> logged in
 	// false -> not logged in
@@ -47,10 +54,12 @@ class Auth {
 		return loginData ? loginData : demoData;
 	}
 
-	login(cb, id, pswd) {
+	login(cb, id, pswd, officer) {
 		this.authenticated = true;
 		this.saveSession(true);
 		this.saveLoginData(id, pswd);
+
+		this.saveOfficerFullData(officer);
 		cb();
 		// callback function
 	}

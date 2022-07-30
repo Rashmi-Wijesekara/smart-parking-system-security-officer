@@ -8,10 +8,10 @@ import auth from "../../shared/Auth";
 const Login = () => {
 	let history = useHistory();
 
-	const loginHandler = (id, pswd) => {
+	const loginHandler = (id, pswd, officer) => {
 		auth.login(() => {
 			history.push("/dashboard")
-		}, id, pswd)
+		}, id, pswd, officer)
 	}	
 
 	return (
