@@ -18,6 +18,12 @@ class Auth {
 		)
 	}
 
+	getOfficerFullData() {
+		const tokenString = sessionStorage.getItem("officerFullData")
+		const officer = JSON.parse(tokenString)
+		return officer;
+	}
+
 	// get the login status from the session
 	// true -> logged in
 	// false -> not logged in

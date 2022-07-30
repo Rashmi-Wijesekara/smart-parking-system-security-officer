@@ -11,7 +11,17 @@ import MainPopup from "../components/MainPopup";
 import { ReactComponent as ConnectIcon } from "../../assets/icons/connect.svg";
 import * as sampleData from "../../sampleData";
 
+import Auth from "../../shared/Auth";
+
+import Dashboard__connection from "../../connections/Dashboard-to";
+
 const Dashboard = () => {
+	const officer = Auth.getOfficerFullData();
+
+	// still loading the page or not (fetching data finished or not)
+	const [loading, setLoading] = useState(true);
+	const [inCharge, setInCharge] = useState();
+
 	// reader device paired or not
 	const [readerStatus, setReaderStatus] = useState(false);
 
@@ -22,12 +32,39 @@ const Dashboard = () => {
 	// get the employee data from the sample database
 	const employeeData = sampleData.employeeData;
 
-	// ***********************************************
-
 	const MainPopupOpen = () => {
 		console.log("opened");
 		setOpenMainPopup(true);
 	};
+
+	// ****************************************************************
+	useEffect(() => {
+		// security officer in-charge
+		const getInCharge = async () => {
+			const data =
+				await Dashboard__connection.officerInCharge(
+					officer.id
+				);
+			
+			if(!data){
+				throw new Error("no any shift logs found today")
+			}
+			await setInCharge(data);
+		};
+
+		// ************************************************
+		// latest parking logs
+
+		if (loading) {
+			// still loading
+			getInCharge().catch((err) => {
+				console.log(err);
+			});
+			console.log(inCharge);
+		} else {
+			// loading completed
+		}
+	}, [loading]);
 
 	// check whether the RFID device is already connected
 	useEffect(() => {
@@ -36,9 +73,9 @@ const Dashboard = () => {
 				if (
 					device.productName === "SYC ID&IC USB Reader" &&
 					device.serialNumber === "08FF20140315"
-				){
-					setReaderStatus(true)
-					console.log("RFID reader already connected")
+				) {
+					setReaderStatus(true);
+					console.log("RFID reader already connected");
 				}
 			});
 		});
@@ -122,7 +159,12 @@ const Dashboard = () => {
 						<ParkingLogTable />
 					</div>
 					<div className="flex-col items-center justify-items-center mx-2">
-						<OfficerIncharge />
+						{inCharge && (
+							<OfficerIncharge
+								officer={officer}
+								inCharge={inCharge}
+							/>
+						)}
 						<ParkingSlotsCount />
 					</div>
 				</div>
