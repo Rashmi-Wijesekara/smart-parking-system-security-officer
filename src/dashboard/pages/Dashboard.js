@@ -56,7 +56,6 @@ const Dashboard = () => {
 			await setInCharge(data);
 		};
 
-		// ************************************************
 		// latest parking logs
 		const getLatestParkingLog = async () => {
 			const data =
@@ -81,8 +80,11 @@ const Dashboard = () => {
 				console.log(err);
 			});
 			setLoading(false);
+
 		} else {
 			// loading completed
+			document.getElementById("rfid").disabled = false;
+			document.getElementById("rfid").focus();
 		}
 		setOpenMainPopup(false)
 
@@ -136,6 +138,11 @@ const Dashboard = () => {
 		}
 	}, [openMainPopup]);
 
+	const focusOnReader = () => {
+		document.getElementById("rfid").disabled = false;
+		document.getElementById("rfid").focus();
+	}
+
 	const readerConnect = () => {
 		// select the RFID reader from the alert notification
 		// and give permission to use in this website
@@ -176,7 +183,7 @@ const Dashboard = () => {
 	};
 
 	return !loading ? (
-		<div className="flex flex-row">
+		<div className="flex flex-row" onClick={focusOnReader}>
 			<Navbar path="/dashboard" />
 			<div className="bg-background flex-grow pl-[270px] h-screen overflow-y-auto">
 				{/* top section with RFID reader status */}
@@ -235,13 +242,15 @@ const Dashboard = () => {
 					disabled={false}
 					onChange={handleRfidChange}
 				/>
-				{openMainPopup && (<MainPopup
+				{openMainPopup && (
+					<MainPopup
 						openMainPopup={setOpenMainPopup}
+						setLoading={setLoading}
 						employeeId={rfid}
 						employeeName={employeeName}
-						vehicleList = {vehicleList}
-					/>)
-				}
+						vehicleList={vehicleList}
+					/>
+				)}
 			</div>
 		</div>
 	) : (

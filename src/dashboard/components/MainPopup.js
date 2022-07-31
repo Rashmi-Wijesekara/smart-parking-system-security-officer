@@ -1,14 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { ReactComponent as ProfilePic } from "../../assets/images/profile-pic.svg";
+import Dashboard__connection from "../../connections/Dashboard-to";
 
 const MainPopup = (props) => {
 	const rfidId = props.employeeId;
 	const employeeName = props.employeeName;
 	const vehicleList = props.vehicleList;
+	let selectedVehicle;
 
 	// save the data in the database
-	const submitEntry = () => {
+	const submitEntry = async () => {
+		selectedVehicle =
+			document.getElementById("vehicleId").value;
+
+		const data =
+			await Dashboard__connection.parkingLogSubmit(
+				rfidId,
+				employeeName,
+				selectedVehicle
+			);
+		
+		if(data === "ok"){
+			console.log(data);
+		}
+
 		props.openMainPopup(false);
+		props.setLoading(true)
 	};
 
 	return (
