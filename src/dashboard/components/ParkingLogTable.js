@@ -3,9 +3,11 @@ import React from "react";
 import Table from "../../shared/components/Table";
 import * as sampleData from "../../sampleData";
 
-const ParkingLogTable = () => {
-	const parkingLogData = sampleData.parkingLogData;
+const ParkingLogTable = (props) => {
+
 	const parkingLogTitles = sampleData.parkingLogTitles;
+	const message = props.message
+	const parkingLogData = props.data
 
 	return (
 		<div className="">
@@ -16,6 +18,7 @@ const ParkingLogTable = () => {
 				<Table
 					titles={parkingLogTitles}
 					data={parkingLogData}
+					message={message}
 				/>
 			</div>
 		</div>

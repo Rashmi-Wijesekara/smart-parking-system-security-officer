@@ -21,6 +21,8 @@ const Dashboard = () => {
 	// still loading the page or not (fetching data finished or not)
 	const [loading, setLoading] = useState(true);
 	const [inCharge, setInCharge] = useState();
+	const [latestParkingLog, setLatestParkingLog] =
+		useState();
 
 	// reader device paired or not
 	const [readerStatus, setReaderStatus] = useState(false);
@@ -45,22 +47,37 @@ const Dashboard = () => {
 				await Dashboard__connection.officerInCharge(
 					officer.id
 				);
-			
-			if(!data){
-				throw new Error("no any shift logs found today")
+
+			if (!data) {
+				throw new Error("no any shift logs found today");
 			}
 			await setInCharge(data);
 		};
 
 		// ************************************************
 		// latest parking logs
+		const getLatestParkingLog = async () => {
+			const data =
+				await Dashboard__connection.latestParkingLog();
+
+			if (data === false) {
+				console.log("empty parking log latest")
+				setLatestParkingLog(false)
+				return
+			}
+			await setLatestParkingLog(data);
+		};
 
 		if (loading) {
 			// still loading
 			getInCharge().catch((err) => {
 				console.log(err);
 			});
-			console.log(inCharge);
+			// console.log(inCharge);
+			
+			getLatestParkingLog().catch((err) => {
+				console.log(err);
+			});
 		} else {
 			// loading completed
 		}
@@ -133,11 +150,13 @@ const Dashboard = () => {
 		<div className="flex flex-row">
 			<Navbar path="/dashboard" />
 			<div className="bg-background flex-grow pl-[270px] h-screen overflow-y-auto">
+				{/* top section with RFID reader status */}
 				<div className="flex flex-row font-main text-lg font-bold text-textGrey w-full my-2">
 					<div className="my-auto ml-80">
 						Parking Space Overview
 					</div>
 
+					{/* RFID reader status Button */}
 					<div
 						onClick={readerConnect}
 						className={
@@ -153,18 +172,34 @@ const Dashboard = () => {
 						</div>
 					</div>
 				</div>
+
+				{/* bottom section fields */}
 				<div className="flex flex-row mt-4">
 					<div className="grow px-2">
 						<ParkingSpace sample1={false} sample2={true} />
-						<ParkingLogTable />
+
+						{/* latest parking logs today */}
+						{
+						latestParkingLog ? 
+							(
+								<ParkingLogTable data={latestParkingLog}/>
+							) :
+							(<ParkingLogTable message={true}/>)
+							
+						}
 					</div>
+
+					{/* right side fields */}
 					<div className="flex-col items-center justify-items-center mx-2">
+						{/* security officer in-charge data */}
 						{inCharge && (
 							<OfficerIncharge
 								officer={officer}
 								inCharge={inCharge}
 							/>
 						)}
+
+						{/* parking slots counts display */}
 						<ParkingSlotsCount />
 					</div>
 				</div>
