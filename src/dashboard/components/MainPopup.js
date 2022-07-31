@@ -4,12 +4,7 @@ import { ReactComponent as ProfilePic } from "../../assets/images/profile-pic.sv
 const MainPopup = (props) => {
 	const rfidId = props.employeeId;
 	const employeeName = props.employeeName;
-	const list = props.vehicleList;
-
-	// const [vehicleList, setVehicleList] = useState([]);
-
-	// setVehicleList(list);
-	// console.log(vehicleList);
+	const vehicleList = props.vehicleList;
 
 	// save the data in the database
 	const submitEntry = () => {
@@ -59,17 +54,13 @@ const MainPopup = (props) => {
 							name="vehicleId"
 							className="bg-textInput w-full rounded-lg my-auto h-10 px-3 py-2"
 						>
-							<option value="1">CSF 3422</option>
-							<option value="2">SD 3112</option>
-							<option value="3">GG 3241</option>
-
-							{/* {vehicleList &&
-								(vehicleList.map((vehicle) => {
-									return (<option key={vehicle} value={vehicle}>
+							{vehicleList.map((vehicle) => {
+								return (
+									<option key={vehicle} value={vehicle}>
 										{vehicle}
-									</option>)
-								}))
-							} */}
+									</option>
+								);
+							})}
 						</select>
 					</div>
 
