@@ -17,10 +17,10 @@ const OfficerIncharge = (props) => {
 			<div className="w-40 text-lg font-bold text-textGrey text-center mx-auto ">
 				Security Officer in-charge
 			</div>
-			<div className="bg-white shadow-lg rounded-xl mx-10 pb-2">
+			<div className="bg-white shadow-lg rounded-xl mx-2 pb-2">
 				<div className="flex flex-col">
 					<ProfilePic className="mx-auto w-[100px] -my-2" />
-					<div className="font-main w-fit mx-2">
+					<div className="font-main w-fit mx-2 px-6">
 						<div className="font-bold">{fullname}</div>
 						<div className="text-navbarTextGrey text-sm my-1">
 							<div className="">
