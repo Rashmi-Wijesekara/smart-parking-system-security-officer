@@ -33,6 +33,17 @@ class Dashboard__connection {
 		return latest
 	}
 
+	async getEmployeeDataRFID(id) {
+		const thisUrl = main.url + "/employee/"+ id
+		const res = await fetch(thisUrl, {
+			method: 'GET',
+			headers: { "Content-Type": "application/json" }
+		})
+
+		const data = await res.json()
+		return data.data[0]
+	}
+
 }
 
 export default new Dashboard__connection();

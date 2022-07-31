@@ -1,14 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { ReactComponent as ProfilePic } from "../../assets/images/profile-pic.svg";
 
 const MainPopup = (props) => {
 	const rfidId = props.employeeId;
 	const employeeName = props.employeeName;
+	const list = props.vehicleList;
+
+	// const [vehicleList, setVehicleList] = useState([]);
+
+	// setVehicleList(list);
+	// console.log(vehicleList);
 
 	// save the data in the database
 	const submitEntry = () => {
-		props.openMainPopup(false)
-	}
+		props.openMainPopup(false);
+	};
 
 	return (
 		<div
@@ -56,6 +62,14 @@ const MainPopup = (props) => {
 							<option value="1">CSF 3422</option>
 							<option value="2">SD 3112</option>
 							<option value="3">GG 3241</option>
+
+							{/* {vehicleList &&
+								(vehicleList.map((vehicle) => {
+									return (<option key={vehicle} value={vehicle}>
+										{vehicle}
+									</option>)
+								}))
+							} */}
 						</select>
 					</div>
 

@@ -7,6 +7,7 @@ import OfficerIncharge from "../components/OfficerIncharge";
 import ParkingSlotsCount from "../components/ParkingSlotsCount";
 import ParkingLogTable from "../components/ParkingLogTable";
 import MainPopup from "../components/MainPopup";
+import LoadingSpinner from "../../shared/loading-spinner/LoadingSpinner"
 
 import { ReactComponent as ConnectIcon } from "../../assets/icons/connect.svg";
 import * as sampleData from "../../sampleData";
@@ -21,8 +22,8 @@ const Dashboard = () => {
 	// still loading the page or not (fetching data finished or not)
 	const [loading, setLoading] = useState(true);
 	const [inCharge, setInCharge] = useState();
-	const [latestParkingLog, setLatestParkingLog] =
-		useState();
+	const [latestParkingLog, setLatestParkingLog] = useState();
+	const [rfidReceived, setRfidReceived] = useState(false);
 
 	// reader device paired or not
 	const [readerStatus, setReaderStatus] = useState(false);
@@ -30,6 +31,7 @@ const Dashboard = () => {
 	const [openMainPopup, setOpenMainPopup] = useState(false);
 	const [rfid, setRfid] = useState("");
 	const [employeeName, setEmployeeName] = useState("");
+	const [vehicleList, setVehicleList] = useState([]);
 
 	// get the employee data from the sample database
 	const employeeData = sampleData.employeeData;
@@ -61,9 +63,9 @@ const Dashboard = () => {
 				await Dashboard__connection.latestParkingLog();
 
 			if (data === false) {
-				console.log("empty parking log latest")
-				setLatestParkingLog(false)
-				return
+				console.log("empty parking log latest");
+				setLatestParkingLog(false);
+				return;
 			}
 			await setLatestParkingLog(data);
 		};
@@ -74,13 +76,16 @@ const Dashboard = () => {
 				console.log(err);
 			});
 			// console.log(inCharge);
-			
+
 			getLatestParkingLog().catch((err) => {
 				console.log(err);
 			});
+			setLoading(false);
 		} else {
 			// loading completed
 		}
+		setOpenMainPopup(false)
+
 	}, [loading]);
 
 	// check whether the RFID device is already connected
@@ -98,13 +103,36 @@ const Dashboard = () => {
 		});
 	});
 
+	useEffect(() => {
+		// get RFID read employee's information
+		const getEmployeeData = async (id) => {
+			const data =
+				await Dashboard__connection.getEmployeeDataRFID(id);
+			console.log(data);
+
+			await setEmployeeName(data.name)
+			await setVehicleList(data.vehicleList)
+		};
+		
+		// an ID is read already
+		if (rfidReceived === true) {
+			getEmployeeData(rfid).catch((err) => {
+				console.log(err);
+			});
+
+			setRfidReceived(false)
+		}
+	}, [rfidReceived])
+
 	// hidden RFID input field disabled when the main popup is opened
 	useEffect(() => {
-		if (openMainPopup === true) {
-			document.getElementById("rfid").disabled = true;
-		} else if (openMainPopup === false) {
-			document.getElementById("rfid").disabled = false;
-			document.getElementById("rfid").focus();
+		if (loading === false) {
+			if (openMainPopup === true) {
+				document.getElementById("rfid").disabled = true;
+			} else if (openMainPopup === false) {
+				document.getElementById("rfid").disabled = false;
+				document.getElementById("rfid").focus();
+			}
 		}
 	}, [openMainPopup]);
 
@@ -128,25 +156,26 @@ const Dashboard = () => {
 		});
 	});
 
-	const handleRfidChange = (event) => {
+	const handleRfidChange = async (event) => {
 		setRfid(event.target.value);
 
 		// scanner fully got the ID value
 		if (rfid.length === 9) {
-			console.log(rfid);
+			await setRfidReceived(true);
+
 			MainPopupOpen();
 			document.getElementById("rfid").value = "";
 
-			for (const employee of employeeData) {
-				if (employee.employeeId === rfid) {
-					console.log(employee.name);
-					setEmployeeName(employee.name);
-				}
-			}
+			// for (const employee of employeeData) {
+			// 	if (employee.employeeId === rfid) {
+			// 		console.log(employee.name);
+			// 		setEmployeeName(employee.name);
+			// 	}
+			// }
 		}
 	};
 
-	return (
+	return !loading ? (
 		<div className="flex flex-row">
 			<Navbar path="/dashboard" />
 			<div className="bg-background flex-grow pl-[270px] h-screen overflow-y-auto">
@@ -160,7 +189,7 @@ const Dashboard = () => {
 					<div
 						onClick={readerConnect}
 						className={
-							"flex mr-16 ml-auto my-auto text-sm font-second w-fit text-white py-2 px-4 rounded-xl cursor-pointer shadow-md hover:shadow-xl transform duration-300 active:translate-y-2 " +
+							"flex mr-12 ml-auto my-auto text-sm font-second w-fit text-white py-2 px-4 rounded-xl cursor-pointer shadow-md hover:shadow-xl transform duration-300 active:translate-y-2 " +
 							(readerStatus ? "bg-green-400" : "bg-red-400")
 						}
 					>
@@ -172,19 +201,17 @@ const Dashboard = () => {
 						</div>
 					</div>
 				</div>
-
 				{/* bottom section fields */}
 				<div className="flex flex-row mt-4">
 					<div className="grow px-2">
 						<ParkingSpace sample1={false} sample2={true} />
 
 						{/* latest parking logs today */}
-						{latestParkingLog ? 
-							(
-								<ParkingLogTable data={latestParkingLog}/>
-							) :
-							(<ParkingLogTable message={true}/>)
-						}
+						{latestParkingLog ? (
+							<ParkingLogTable data={latestParkingLog} />
+						) : (
+							<ParkingLogTable message={true} />
+						)}
 					</div>
 
 					{/* right side fields */}
@@ -208,15 +235,18 @@ const Dashboard = () => {
 					disabled={false}
 					onChange={handleRfidChange}
 				/>
+				{openMainPopup && (<MainPopup
+						openMainPopup={setOpenMainPopup}
+						employeeId={rfid}
+						employeeName={employeeName}
+						vehicleList = {vehicleList}
+					/>)
+				}
 			</div>
-
-			{openMainPopup && (
-				<MainPopup
-					openMainPopup={setOpenMainPopup}
-					employeeId={rfid}
-					employeeName={employeeName}
-				/>
-			)}
+		</div>
+	) : (
+		<div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+			<LoadingSpinner />
 		</div>
 	);
 };

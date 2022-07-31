@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import Navbar from "../../shared/components/Navbar";
 import Table from "../../shared/components/Table";
@@ -6,9 +6,13 @@ import EmployeeSearchForm from "../../shared/components/EmployeeSearchForm";
 import * as sampleData from "../../sampleData";
 
 const EmployeeData = () => {
-	const employeeTitles = sampleData.employeeTitles
-	const employeeData = sampleData.employeeData
+	
+	// still loading the page or not (fetching data finished or not)
+	const [loading, setLoading] = useState(true);
 
+	const employeeTitles = sampleData.employeeTitles;
+	const employeeData = sampleData.employeeData;
+	
 	return (
 		<div className="flex flex-row">
 			<Navbar path="/employee-data" />
