@@ -179,13 +179,11 @@ const Dashboard = () => {
 						<ParkingSpace sample1={false} sample2={true} />
 
 						{/* latest parking logs today */}
-						{
-						latestParkingLog ? 
+						{latestParkingLog ? 
 							(
 								<ParkingLogTable data={latestParkingLog}/>
 							) :
 							(<ParkingLogTable message={true}/>)
-							
 						}
 					</div>
 

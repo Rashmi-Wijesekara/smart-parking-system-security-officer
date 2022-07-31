@@ -5,32 +5,56 @@ class Login__connection {
 		const thisUrl = main.url + "/security-officer/" + soid;
 		const res = await fetch(thisUrl, {
 			method: "GET",
-			headers: { "Content-Type": "application/json"}
-		})
+			headers: { "Content-Type": "application/json" },
+		});
 		const data = await res.json();
 		return data.data[0];
 	}
 
 	async createShiftLog(soid) {
-		const date = this.getDate()
-		const time = this.getTime()
+		const date = this.getDate();
+		const time = this.getTime();
 
-		const thisUrl = main.url + "/security-officer/shift-log/" + soid
+		const thisUrl =
+			main.url + "/security-officer/shift-log/" + soid;
 		const res = await fetch(thisUrl, {
 			method: "POST",
-			headers: { "Content-Type": "application/json"},
+			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({
 				date: date,
-				startTime: time
-			})
-		})
-		const data = await res.json()
+				startTime: time,
+			}),
+		});
+		const data = await res.json();
 		return data.data;
+	}
+
+	async updateShiftLog(soid) {
+		const time = this.getTime();
+
+		const thisUrl =
+			main.url + "/security-officer/shift-log/" + soid;
+
+		const res = await fetch(thisUrl, {
+			method: "PATCH",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				endTime: time,
+			}),
+		});
+		const data = await res.json();
+
+		const result = data.data;
+
+		if (!result || result.length === 0) {
+			return false;
+		}
+		return true;
 	}
 
 	// return today date
 	// format - 2022-07-27
-	getDate(){
+	getDate() {
 		const defaultDate = new Date();
 		const date = defaultDate
 			.toLocaleDateString("en-GB")
@@ -38,11 +62,11 @@ class Login__connection {
 			.reverse()
 			.join("-");
 		return date;
-	};
+	}
 
 	// return time now
 	// format - 06:54 pm
-	getTime(){
+	getTime() {
 		const defaultTime = new Date();
 		const time = defaultTime.toLocaleString("en-GB", {
 			hour: "2-digit",
@@ -50,7 +74,7 @@ class Login__connection {
 			hour12: true,
 		});
 		return time;
-	};
+	}
 }
 
 export default new Login__connection();
