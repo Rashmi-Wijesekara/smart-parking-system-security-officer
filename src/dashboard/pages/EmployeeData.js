@@ -17,16 +17,19 @@ const EmployeeData = () => {
 	const [state, setState] = useState(1);
 	const [loadTable, setLoadTable] = useState(false);
 
+	const [addVehi, setAddVehi] = useState("");
+	const [removeVehi, setRemoveVehi] = useState("");
+
 	const employeeTitles = sampleData.employeeTitles;
 	const employeeData = sampleData.employeeData;
 
+	// search employee data for given vehicle id
 	useEffect(() => {
 		const getEmployeeByVehicleId = async (vehicleId) => {
 			const data =
 				await EmployeeData__connection.getEmployeeByVehicleId(
 					vehicleId
 				);
-			console.log(data);
 			await setFullEmployeeData(data);
 		};
 
@@ -35,6 +38,7 @@ const EmployeeData = () => {
 		
 	}, [vehicleId]);
 
+	// loading employee data table
 	useEffect(() => {
 		const getFullEmployeeData = async () => {
 			const data =
@@ -52,8 +56,14 @@ const EmployeeData = () => {
 	const setVehicle = (veid) => {
 		setState(2);
 		setVehicleId(veid);
-		console.log(veid + " clicked");
 	};
+
+	const addVehicleHandler = (emid, veid)=> {
+		console.log(emid + " "+ veid)
+	}
+	const removeVehicleHandler = (emid, veid) => {
+		console.log(emid + " " + veid);
+	}
 
 	return !loading ? (
 		<div className="flex flex-row">
@@ -70,7 +80,11 @@ const EmployeeData = () => {
 						/>)}
 					</div>
 					<div className="flex-col items-center justify-items-center mx-10">
-						<EmployeeSearchForm vehicleId={setVehicle} />
+						<EmployeeSearchForm 
+							vehicleId={setVehicle} 
+							addHandler={addVehicleHandler} 
+							removeHandler={removeVehicleHandler}
+						/>
 					</div>
 				</div>
 			</div>

@@ -1,21 +1,49 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const VehicleHandlePopup = (props) => {
+	const [employeeId, setEmployeeId] = useState("")
+	const [vehicleId, setVehicleId] = useState("")
+
 	const type = props.btnName
 
 	// add or remove a vehicle
 	const saveVehicleUpdate = () => {
 		// send data back to the database
+		if (type === "Add Vehicle") {
+			props.getAddVeid(vehicleId);
+			props.getAddEmid(employeeId);
+
+			props.closeAddVehicle(false);
+		} else if (type === "Remove Vehicle") {
+			props.removeAddVeid(vehicleId);
+			props.removeAddEmid(employeeId);
+
+			props.closeRemoveVehicle(false);
+		}
+		setEmployeeId("");
+		setVehicleId("");
 	}
 
 	// close the modal when cancel button is clicked
 	const closeModalHandler = () => {
+
 		if (type === "Add Vehicle") {
 			props.closeAddVehicle(false);
 		} else if (type === "Remove Vehicle") {
 			props.closeRemoveVehicle(false);
 		}
+
 	}
+
+	const handleEmidChange = (event) => {
+		setEmployeeId(event.target.value);
+	}
+
+	const handleVeidChange = (event) => {
+		setVehicleId(event.target.value)
+	}
+
+	// console.log(vehicleId)
 
 	return (
 		<div
@@ -32,6 +60,9 @@ const VehicleHandlePopup = (props) => {
 				<input
 					type="text"
 					className="bg-textInput w-full rounded-lg my-3 mb-5 h-10 px-3 py-2"
+					onChange={(event) =>
+						handleEmidChange(event)
+					}
 				/>
 
 				<div className="text-textGrey text-md">
@@ -40,6 +71,9 @@ const VehicleHandlePopup = (props) => {
 				<input
 					type="text"
 					className="bg-textInput w-full rounded-lg my-3 mb-5 h-10 px-3 py-2"
+					onChange={(event) =>
+						handleVeidChange(event)
+					}
 				/>
 
 				<div

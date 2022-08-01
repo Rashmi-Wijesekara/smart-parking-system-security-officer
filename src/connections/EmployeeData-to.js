@@ -57,9 +57,34 @@ class EmployeeData__connection {
 		return set
 	}
 
-	async addVehicle() {}
+	async addVehicle(emid, veid) {
+		const thisUrl = main.url + `/employee/${emid}/vehicles/add`
+		const res = await fetch(thisUrl, {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				vehicleId: veid
+			}),
+		});
+		const data = await res.json();
 
-	async removeVehicle() {}
+		console.log(data);
+	}
+
+	async removeVehicle(emid, veid) {
+		const thisUrl =
+			main.url + `/employee/${emid}/vehicles/remove`;
+		const res = await fetch(thisUrl, {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				vehicleId: veid,
+			}),
+		});
+		const data = await res.json();
+
+		console.log(data);
+	}
 }
 
 export default new EmployeeData__connection();
