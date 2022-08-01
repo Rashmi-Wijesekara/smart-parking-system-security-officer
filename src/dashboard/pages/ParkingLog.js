@@ -15,6 +15,10 @@ const ParkingLog = () => {
 	// still loading the page or not (fetching data finished or not)
 	const [loading, setLoading] = useState(true);
 	const [fullParkingLog, setFullParkingLog] = useState();
+	const [date, setDate] = useState("")
+	const [from, setFrom] = useState("")
+	const [to, setTo] = useState("")
+	const [gotTime, setGotTime] = useState(false)
 
 	// loading parking log data table
 	useEffect(() => {
@@ -28,6 +32,27 @@ const ParkingLog = () => {
 
 		setLoading(false);
 	}, [loading]);
+
+	useEffect(() => {
+		const logByDateTimeResult = async (date, from, to) => {
+			const data = await ParkingLog__connection.logByDateTime(date, from, to)
+			await setFullParkingLog(data)
+			// setLoading(true);
+		}
+
+		if(gotTime === true) {
+			logByDateTimeResult(date, from, to)
+			setGotTime(false)
+		}
+	}, [gotTime])
+
+	const getData = (date, from, to) => {
+		console.log('getData ', date, from, to);
+		setDate(date);
+		setFrom(from);
+		setTo(to);
+		setGotTime(true)
+	}	
 
 	return !loading ? (
 		<div className="flex flex-row">
@@ -46,7 +71,7 @@ const ParkingLog = () => {
 						)}
 					</div>
 					<div className="flex-col items-center justify-items-center mx-10">
-						<SearchForm />
+						<SearchForm getData={getData}/>
 					</div>
 				</div>
 			</div>
