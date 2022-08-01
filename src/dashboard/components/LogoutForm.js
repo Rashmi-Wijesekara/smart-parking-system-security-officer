@@ -5,7 +5,12 @@ import auth from "../../shared/Auth"
 
 const LogoutForm = (props) => {
 	const [error, setError] = useState("");
+	const propsError = props.error
 
+	if(propsError) {
+		setError(propsError)
+	}
+	
 	const InputNames = [
 		{ id: 1, name: "Security Officer ID", type: "text" },
 		{ id: 2, name: "Password", type: "password" },

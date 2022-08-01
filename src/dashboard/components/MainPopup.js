@@ -1,14 +1,32 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { ReactComponent as ProfilePic } from "../../assets/images/profile-pic.svg";
+import Dashboard__connection from "../../connections/Dashboard-to";
 
 const MainPopup = (props) => {
 	const rfidId = props.employeeId;
 	const employeeName = props.employeeName;
+	const vehicleList = props.vehicleList;
+	let selectedVehicle;
 
 	// save the data in the database
-	const submitEntry = () => {
-		props.openMainPopup(false)
-	}
+	const submitEntry = async () => {
+		selectedVehicle =
+			document.getElementById("vehicleId").value;
+
+		const data =
+			await Dashboard__connection.parkingLogSubmit(
+				rfidId,
+				employeeName,
+				selectedVehicle
+			);
+		
+		if(data === "ok"){
+			console.log(data);
+		}
+
+		props.openMainPopup(false);
+		props.setLoading(true)
+	};
 
 	return (
 		<div
@@ -53,9 +71,13 @@ const MainPopup = (props) => {
 							name="vehicleId"
 							className="bg-textInput w-full rounded-lg my-auto h-10 px-3 py-2"
 						>
-							<option value="1">CSF 3422</option>
-							<option value="2">SD 3112</option>
-							<option value="3">GG 3241</option>
+							{vehicleList.map((vehicle) => {
+								return (
+									<option key={vehicle} value={vehicle}>
+										{vehicle}
+									</option>
+								);
+							})}
 						</select>
 					</div>
 

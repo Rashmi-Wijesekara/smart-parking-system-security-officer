@@ -188,7 +188,7 @@ export const employeeData = [
 		id: "1",
 		employeeId: "000294392",
 		name: "M.R. Perera",
-		vehicleId: "CDB 4306",
+		vehicleId: ["CDB 4306", "CDB 4305"],
 		phoneNo: "0778435221",
 	},
 	{

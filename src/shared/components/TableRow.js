@@ -10,7 +10,7 @@ const TableRow = (props) => {
 			}
 		>
 			{Object.keys(row).map((key) => {
-				if (key !== "id") {
+				if (key !== "_id" && key !== "id") {
 					return (
 						<td
 							key={key}
