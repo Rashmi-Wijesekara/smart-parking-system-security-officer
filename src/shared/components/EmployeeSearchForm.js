@@ -2,14 +2,22 @@ import React, { useState } from "react";
 import { ReactComponent as SearchIcon } from "../../assets/icons/search.svg";
 import VehicleHandle from "../../shared/components/VehicleHandlePopup";
 
-const EmployeeSearchForm = () => {
+const EmployeeSearchForm = (props) => {
 	const [openAddVehicle, setOpenAddVehicle] =
 		useState(false);
 	const [openRemoveVehicle, setOpenRemoveVehicle] =
 		useState(false);
 
+	const [vehicleId, setVehicleId] = useState("");
+
+	//vehicle id input field is updated
+	const handleTextInputChange = (event) => {
+		setVehicleId(event.target.value);
+	};
+
 	const searchClickHandler = () => {
 		// send the inputs back to the page
+		props.vehicleId(vehicleId)
 	};
 
 	// add a new vehicle
@@ -28,9 +36,14 @@ const EmployeeSearchForm = () => {
 				<div className="text-textGrey text-md text-center">
 					Vehicle ID :
 				</div>
+
+				{/* vehicle id input field */}
 				<input
 					type="text"
 					className="bg-textInput w-full rounded-lg my-3 mb-5 h-10 px-3 py-2"
+					onChange={(event) =>
+						handleTextInputChange(event)
+					}
 				/>
 
 				<div
@@ -53,7 +66,7 @@ const EmployeeSearchForm = () => {
 			>
 				Remove a Vehicle
 			</div>
-			
+
 			{/* popup windows */}
 			{openAddVehicle && (
 				<VehicleHandle
