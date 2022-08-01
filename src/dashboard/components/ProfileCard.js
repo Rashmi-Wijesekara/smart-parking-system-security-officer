@@ -1,18 +1,22 @@
 import React from "react";
 import { ReactComponent as ProfilePic } from "../../assets/images/profile-pic.svg"
+import Auth from "../../shared/Auth"
 
 const ProfileCard = () => {
 
-	const fullname = "Mahinda Perera"
-	const officerId = "SE123"
-	const email = "abc@gmail.com"
-	const phone = "0771235564"
+	const officer = Auth.getOfficerFullData()
+	console.log(officer)
+
+	const fullname = officer.name
+	const officerId = officer.id
+	const email = officer.email
+	const phone = officer.phoneNo
 
 	return (
 		<div className="bg-white max-w-xs shadow-lg rounded-xl">
 			<div className="flex flex-col">
 				<ProfilePic className="mx-auto mt-8 w-[140px]" />
-				<div className="font-main w-fit mx-10 my-4">
+				<div className="font-main w-fit mx-6 my-4">
 					<div className="font-bold my-3">
 						Name : {fullname}
 					</div>
