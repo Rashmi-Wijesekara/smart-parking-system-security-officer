@@ -41,7 +41,6 @@ const Dashboard = () => {
 		setOpenMainPopup(true);
 	};
 
-	// ****************************************************************
 	useEffect(() => {
 		// security officer in-charge
 		const getInCharge = async () => {
@@ -139,8 +138,10 @@ const Dashboard = () => {
 	}, [openMainPopup]);
 
 	const focusOnReader = () => {
-		document.getElementById("rfid").disabled = false;
-		document.getElementById("rfid").focus();
+		if (openMainPopup === false) {
+			document.getElementById("rfid").disabled = false;
+			document.getElementById("rfid").focus();
+		}
 	}
 
 	const readerConnect = () => {
@@ -172,13 +173,6 @@ const Dashboard = () => {
 
 			MainPopupOpen();
 			document.getElementById("rfid").value = "";
-
-			// for (const employee of employeeData) {
-			// 	if (employee.employeeId === rfid) {
-			// 		console.log(employee.name);
-			// 		setEmployeeName(employee.name);
-			// 	}
-			// }
 		}
 	};
 
