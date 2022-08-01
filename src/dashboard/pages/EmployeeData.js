@@ -17,8 +17,8 @@ const EmployeeData = () => {
 	const [state, setState] = useState(1);
 	const [loadTable, setLoadTable] = useState(false);
 
-	const [addVehi, setAddVehi] = useState("");
-	const [removeVehi, setRemoveVehi] = useState("");
+	const [addVehi, setAddVehi] = useState([]);
+	const [removeVehi, setRemoveVehi] = useState([]);
 
 	const employeeTitles = sampleData.employeeTitles;
 	const employeeData = sampleData.employeeData;
@@ -35,7 +35,6 @@ const EmployeeData = () => {
 
 		getEmployeeByVehicleId(vehicleId);
 		setLoading(true);
-		
 	}, [vehicleId]);
 
 	// loading employee data table
@@ -47,23 +46,52 @@ const EmployeeData = () => {
 			await setFullEmployeeData(data);
 		};
 
-		if(vehicleId === "")
-			getFullEmployeeData();
+		if (vehicleId === "") getFullEmployeeData();
 
 		setLoading(false);
 	}, [loading]);
+
+	useEffect(() => {
+		console.log(addVehi);
+		const addVehicle = async (emid, veid) => {
+			const data =
+				await EmployeeData__connection.addVehicle(
+					emid,
+					veid
+				);
+			setVehicleId("");
+			setLoading(true);
+		};
+
+		addVehicle(addVehi[0], addVehi[1]);
+	}, [addVehi]);
+
+	useEffect(() => {
+		// console.log(removeVehi);
+		const removeVehicle = async (emid, veid) => {
+			const data =
+				await EmployeeData__connection.removeVehicle(
+					emid,
+					veid
+				);
+			setVehicleId("");
+			setLoading(true);
+		};
+
+		removeVehicle(removeVehi[0], removeVehi[1]);
+	}, [removeVehi]);
 
 	const setVehicle = (veid) => {
 		setState(2);
 		setVehicleId(veid);
 	};
 
-	const addVehicleHandler = (emid, veid)=> {
-		console.log(emid + " "+ veid)
-	}
+	const addVehicleHandler = (emid, veid) => {
+		setAddVehi([emid, veid]);
+	};
 	const removeVehicleHandler = (emid, veid) => {
-		console.log(emid + " " + veid);
-	}
+		setRemoveVehi([emid, veid]);
+	};
 
 	return !loading ? (
 		<div className="flex flex-row">
@@ -74,15 +102,17 @@ const EmployeeData = () => {
 				</div>
 				<div className="flex flex-row mt-4">
 					<div className="grow px-6">
-						{fullEmployeeData && (<Table
-							titles={employeeTitles}
-							data={fullEmployeeData}
-						/>)}
+						{fullEmployeeData && (
+							<Table
+								titles={employeeTitles}
+								data={fullEmployeeData}
+							/>
+						)}
 					</div>
 					<div className="flex-col items-center justify-items-center mx-10">
-						<EmployeeSearchForm 
-							vehicleId={setVehicle} 
-							addHandler={addVehicleHandler} 
+						<EmployeeSearchForm
+							vehicleId={setVehicle}
+							addHandler={addVehicleHandler}
 							removeHandler={removeVehicleHandler}
 						/>
 					</div>

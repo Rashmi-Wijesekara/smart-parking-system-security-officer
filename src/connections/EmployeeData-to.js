@@ -60,14 +60,14 @@ class EmployeeData__connection {
 	async addVehicle(emid, veid) {
 		const thisUrl = main.url + `/employee/${emid}/vehicles/add`
 		const res = await fetch(thisUrl, {
-			method: "POST",
+			method: "PATCH",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({
 				vehicleId: veid
 			}),
 		});
 		const data = await res.json();
-
+		console.log(thisUrl);
 		console.log(data);
 	}
 
@@ -75,7 +75,7 @@ class EmployeeData__connection {
 		const thisUrl =
 			main.url + `/employee/${emid}/vehicles/remove`;
 		const res = await fetch(thisUrl, {
-			method: "POST",
+			method: "PATCH",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({
 				vehicleId: veid,
