@@ -1,1 +1,1 @@
-export const url = 'http://localhost:5000/api'
+export const url = 'https://smart-paking-system-backend.herokuapp.com/api'
