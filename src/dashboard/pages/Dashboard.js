@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import * as $ from "jquery";
 
+import { db } from "../../realtime/firebaseConfig";
+import { set, ref, onValue } from "firebase/database";
+
 import Navbar from "../../shared/components/Navbar";
 import ParkingSpace from "../components/ParkingSpaceDisplay";
 import OfficerIncharge from "../components/OfficerIncharge";
@@ -24,6 +27,7 @@ const Dashboard = () => {
 	const [inCharge, setInCharge] = useState();
 	const [latestParkingLog, setLatestParkingLog] = useState();
 	const [rfidReceived, setRfidReceived] = useState(false);
+	const [slots, setSlots] = useState();
 
 	// reader device paired or not
 	const [readerStatus, setReaderStatus] = useState(false);
@@ -40,6 +44,15 @@ const Dashboard = () => {
 		console.log("opened");
 		setOpenMainPopup(true);
 	};
+
+	// sample 2 car slots status getting from the realtime firebase database
+	useEffect(() => {
+		onValue(ref(db), (snapshot) => {
+			const data = snapshot.val();
+			console.log(data)
+			setSlots(data);
+		});
+	}, []);
 
 	useEffect(() => {
 		// security officer in-charge
