@@ -19,8 +19,11 @@ import ParkingLog from "./dashboard/pages/ParkingLog";
 import MyProfile from "./dashboard/pages/MyProfile";
 import Logout from "./dashboard/pages/Logout";
 
+import SampleComponent from "./realtime/SampleComponent"
+
 function App() {
 	return (
+
 		<Router>
 			<Switch>
 				<Route path="/" exact>
