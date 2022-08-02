@@ -82,9 +82,9 @@ const MainPopup = (props) => {
 					</div>
 
 					{/* button */}
-					<div className="bg-mainBlue ml-auto mt-auto font-second w-fit text-white py-2 px-6 rounded-xl cursor-pointer shadow-md hover:shadow-xl transform duration-300 active:translate-y-2">
+					{/* <div className="bg-mainBlue ml-auto mt-auto font-second w-fit text-white py-2 px-6 rounded-xl cursor-pointer shadow-md hover:shadow-xl transform duration-300 active:translate-y-2">
 						Add Vehicle
-					</div>
+					</div> */}
 				</div>
 
 				<div
