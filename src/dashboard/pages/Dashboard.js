@@ -218,7 +218,7 @@ const Dashboard = () => {
 				{/* bottom section fields */}
 				<div className="flex flex-row mt-4">
 					<div className="grow px-2">
-						<ParkingSpace sample1={false} sample2={true} />
+						{slots && (<ParkingSpace sample1={slots.slot1} sample2={slots.slot2} />)}
 
 						{/* latest parking logs today */}
 						{latestParkingLog ? (
